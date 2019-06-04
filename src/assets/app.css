@@ -1,0 +1,12 @@
+body{
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.step{
+  transition: all 0.8s;
+  margin-left: 0px;
+}
+
+.step-move{
+  margin-left: -100%;
+}

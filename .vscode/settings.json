@@ -1,0 +1,55 @@
+{
+	"workbench.iconTheme": "material-icon-theme",
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.eslintIntegration": true,
+	"editor.formatOnSave": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"react-hooks",
+		{
+			"language": "typescript",
+			"autoFix": true
+		},
+		{
+			"language": "typescriptreact",
+			"autoFix": true
+		},
+		{
+			"language": "javascript",
+			"autoFix": true
+		},
+		{
+			"language": "javascriptreact",
+			"autoFix": true
+		}
+	],
+	"eslint.autoFixOnSave": true,
+	"git.autofetch": true,
+	"git.confirmSync": false,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.stylelintIntegration": true,
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"window.zoomLevel": 0,
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.requireConfig": true,
+	"editor.formatOnPaste": true,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"editor.detectIndentation": false,
+	"prettier.useTabs": true,
+	"editor.tabSize": 2,
+	"editor.autoIndent": true,
+	"editor.renderWhitespace": "none"
+}
