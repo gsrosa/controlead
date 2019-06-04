@@ -17,8 +17,12 @@ const Nav = styled.nav`
 export default ({ ...props }) => (
 	<>
 		<Nav>
-			<h3>Logo</h3>
-			<h3>Logo</h3>
+			<h3>Controlead</h3>
+			<div className="d-flex flew-wrap w-25 justify-content-between">
+				<span>Fila de espera</span>
+				<span>Usuários ativos</span>
+				<span>Inserir manualmente</span>
+			</div>
 		</Nav>
 		<Container>
 			<props.routes />
