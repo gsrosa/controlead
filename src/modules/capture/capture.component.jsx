@@ -31,7 +31,12 @@ const CaptureComponent = () => (
 							</Column>
 							<Column>
 								<Formik
-									initialValues={{ name: '', whatsapp: '', email: '' }}
+									initialValues={{
+										name: '',
+										whatsapp: '',
+										system_id: '',
+										email: '',
+									}}
 									onSubmit={(values) => {
 										console.log(values)
 										next()
@@ -42,21 +47,28 @@ const CaptureComponent = () => (
 											<Column>
 												<Field
 													name="name"
-													label="Nome"
+													label="*Nome"
+													component={RenderInput}
+												/>
+											</Column>
+											<Column>
+												<Field
+													name="system_id"
+													label="*Id do sistema"
 													component={RenderInput}
 												/>
 											</Column>
 											<Column>
 												<Field
 													name="whatsapp"
-													label="Whatsapp"
+													label="*Whatsapp"
 													component={RenderInput}
 												/>
 											</Column>
 											<Column>
 												<Field
 													name="email"
-													label="Email"
+													label="*Email"
 													component={RenderInput}
 												/>
 											</Column>
