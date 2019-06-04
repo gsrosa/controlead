@@ -31,8 +31,8 @@ const Capture = () => {
 
 export default () => (
 	<Switch>
-		<LoginRoute path="/login" component={Login} />
 		<Route path="/capture/:user" component={Capture} />
+		<LoginRoute path="/login" component={Login} />
 		<PrivateRoute path="/" component={Home} />
 	</Switch>
 )

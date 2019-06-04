@@ -1,6 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const ErrorMessage = styled.span`
+	font-size: 8pt;
+	color: red;
+	width: 100%;
+`
+
 const Label = styled.label`
 	font-size: 10pt;
 	color: #666666;
@@ -24,7 +30,8 @@ const Form = styled.div`
 	float: left;
 	display: flex;
 	flex-colum: reverse;
-	margin-top: 30px;
+	flex-direction: column;
+	margin-top: 20px;
 	${TextInput} {
 		::placeholder {
 			color: transparent;
@@ -57,11 +64,20 @@ const Form = styled.div`
 	}
 `
 
+const FieldForm = styled.div`
+	width: 100%;
+	min-height: 70px;
+	max-height: 70px;
+`
+
 export const Text = ({
-	name, type, label, placeholder = ' ', ...props
+	name, type, label, placeholder = ' ', touched, errors, ...props
 }) => (
-	<Form>
-		<TextInput type={type} name={name} id={name} placeholder={placeholder} {...props} />
-		<Label htmlFor={name}>{label}</Label>
-	</Form>
+	<FieldForm>
+		<Form>
+			<TextInput type={type} name={name} id={name} placeholder={placeholder} {...props} />
+			<Label htmlFor={name}>{label}</Label>
+		</Form>
+		{touched[name] && errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+	</FieldForm>
 )

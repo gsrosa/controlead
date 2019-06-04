@@ -9,13 +9,10 @@ const ErrorMessage = styled.span`
 
 export const RenderInput = ({
 	field, // { name, value, onChange, onBlur }
-	form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+	form,
 	...props
 }) => (
 	<Fragment>
-		<Text {...field} {...props} />
-		{touched[field.name] && errors[field.name] && (
-			<ErrorMessage>{errors[field.name]}</ErrorMessage>
-		)}
+		<Text {...field} {...props} {...form} />
 	</Fragment>
 )

@@ -17,7 +17,7 @@ const CaptureComponent = () => (
 			<Column
 				lg="4"
 				xl="4"
-				style={{ border: '1px solid #ccc', borderRadius: '10px' }}
+				style={{ border: '1px solid #ccc', borderRadius: '10px', width: '80em' }}
 				className="p-3 text-center"
 			>
 				<Row
