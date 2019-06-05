@@ -4,6 +4,7 @@ import { connectRouter, routerMiddleware, push } from 'connected-react-router'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createLogger } from 'redux-logger'
 import reducers from './ducks'
+import api from './middlewares/api.middleware'
 
 export const history = createBrowserHistory()
 
@@ -11,7 +12,7 @@ const prodMiddleware = [routerMiddleware(history)]
 
 const logger = createLogger()
 
-const middlewares = composeWithDevTools(applyMiddleware(...prodMiddleware, logger))
+const middlewares = composeWithDevTools(applyMiddleware(...prodMiddleware, logger, api))
 
 const rootReducers = combineReducers({
 	router: connectRouter(history),
