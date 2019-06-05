@@ -1,21 +1,17 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
-import store, { history } from './store'
+import { BrowserRouter, Router } from 'react-router-dom'
+import { history } from './store'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Main from './main/main.component'
 
 const App = () => (
-	<Provider store={store}>
-		<BrowserRouter>
-			<ConnectedRouter history={history}>
-				<Main />
-			</ConnectedRouter>
-		</BrowserRouter>
-	</Provider>
+	<BrowserRouter>
+		<Router history={history}>
+			<Main />
+		</Router>
+	</BrowserRouter>
 )
 
 export default App

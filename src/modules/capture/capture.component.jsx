@@ -13,11 +13,11 @@ const next = () => {
 	document.getElementById('step1').classList.toggle('step-move')
 }
 
-const CaptureComponent = (props) => {
+const CaptureComponent = ({ match }) => {
+	const { company } = match.params
 	const [result, setResult] = useState(undefined)
-	useEffect(() => {
-		console.log(props)
-	}, [])
+
+	useEffect(() => {}, [])
 
 	return (
 		<Container className="d-flex justify-content-center">
@@ -46,12 +46,7 @@ const CaptureComponent = (props) => {
 											email: '',
 										}}
 										onSubmit={(values) => {
-											console.log(props)
-											props.insert({
-												values,
-												company: props.company,
-												onSuccess: setResult,
-											})
+											console.log(values)
 										}}
 										validationSchema={validation}
 										render={() => (
@@ -105,16 +100,4 @@ const CaptureComponent = (props) => {
 	)
 }
 
-const mapStateToProps = state => ({})
-const mapDispatchToProps = dispatch => ({
-	insert: ({ values, company, onSuccess }) => insertUser({
-		dispatch,
-		onSuccess,
-		values: { company, ...values },
-	}),
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(CaptureComponent)
+export default CaptureComponent

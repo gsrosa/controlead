@@ -16,7 +16,7 @@ export const LoginRoute = ({ path, component, ...props }) => {
 	const { logged } = useContext(UserContext)
 
 	return !logged ? (
-		<Route path={path} component={component} {...props} />
+		<Route exact path={path} component={component} {...props} />
 	) : (
 		<Redirect to={{ pathname: '/' }} />
 	)

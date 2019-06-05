@@ -2,11 +2,11 @@ import React, { lazy, Suspense } from 'react'
 import { Switch } from 'react-router-dom'
 import { PrivateRoute } from './private-route'
 
-const Home = () => {
+const Home = (props) => {
 	const HomeComponent = lazy(() => import('../../modules/home/home.component'))
 	return (
 		<Suspense fallback="loading">
-			<HomeComponent />
+			<HomeComponent {...props} />
 		</Suspense>
 	)
 }
