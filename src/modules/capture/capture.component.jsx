@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Formik, Field, Form } from 'formik'
-import { connect } from 'react-redux'
 import { Container } from '../../components/layout/container'
 import { Row } from '../../components/layout/row'
 import { Column } from '../../components/layout/column'
@@ -15,9 +14,22 @@ const next = () => {
 
 const CaptureComponent = ({ match }) => {
 	const { company } = match.params
-	const [result, setResult] = useState(undefined)
+	const [result, setResult] = useState({})
 
-	useEffect(() => {}, [])
+	const onSuccess = (response) => {
+		setResult(response.data)
+		next()
+	}
+
+	const onFail = (response) => {
+		setResult(response.data)
+		next()
+	}
+
+	useEffect(() => {
+		console.log('setting result')
+		console.log(result)
+	}, [result])
 
 	return (
 		<Container className="d-flex justify-content-center">
@@ -40,13 +52,17 @@ const CaptureComponent = ({ match }) => {
 								<Column>
 									<Formik
 										initialValues={{
-											name: '',
-											whatsapp: '',
-											system_id: '',
-											email: '',
+											name: 'guilherme',
+											whatsapp: '12991936633',
+											system_id: '1234',
+											email: 'gui.rosa.soares@',
 										}}
-										onSubmit={(values) => {
-											console.log(values)
+										onSubmit={async (values) => {
+											insertUser({
+												values: { ...values, company },
+												onSuccess,
+												onFail,
+											})
 										}}
 										validationSchema={validation}
 										render={() => (
@@ -91,7 +107,26 @@ const CaptureComponent = ({ match }) => {
 							</Row>
 						</Column>
 						<Column>
-							<h2>step 2</h2>
+							<h3>{result.name}</h3>
+							<h4 className="text-center">
+								Seu pré-cadastro foi efetuado com sucesso!
+							</h4>
+							Agora você deve efetuar o cadastro na Vencervip utilizando o link abaixo
+							<br />
+							<a href={`https://vencervip.com.br/afiliado/${result.system_id}`}>
+								https://vencervip.com.br/afiliado/
+								{result.sponsor_id}
+							</a>
+							<br />
+							<br />
+							<p>
+								Após efetuar o cadastro e ativação na Vencervip, você deve entrar no
+								link abaixo e seguir os próximos passos
+							</p>
+							<br />
+							<a href="https://controlteam.com.br/pos-cadastro/">
+								https://controlteam.com.br/pos-cadastro/
+							</a>
 						</Column>
 					</Row>
 				</Column>

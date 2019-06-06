@@ -1,18 +1,12 @@
-import { createApiRequest } from '../store/actions/api.actions'
+import { createApiRequest } from '../store/api'
 
-export const insertUser = ({ values, dispatch, onSuccess = () => {} }) => {
+export const insertUser = async ({ values, onSuccess, onFail = () => {} }) => {
 	const url = '/user'
-	return dispatch(
-		createApiRequest({
-			method: 'POST',
-			url,
-			data: { ...values },
-			success: (response) => {
-				onSuccess(response.payload)
-			},
-			fail: (response) => {
-				console.log(response)
-			},
-		}),
-	)
+	createApiRequest({
+		method: 'POST',
+		url,
+		data: { ...values },
+		onSuccess,
+		onFail,
+	})
 }
