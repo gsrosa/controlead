@@ -7,6 +7,7 @@ import { RenderInput } from '../../components/forms/input-render'
 import { Button } from '../../components/button/button'
 import { validation } from './validation'
 import { insertUser } from '../../requests/user.req'
+import { getCompany } from '../../requests/company.req'
 
 const next = () => {
 	document.getElementById('step1').classList.toggle('step-move')
@@ -15,6 +16,16 @@ const next = () => {
 const CaptureComponent = ({ match }) => {
 	const { company } = match.params
 	const [result, setResult] = useState({})
+	const [comp, setCompany] = useState({})
+	const [err, setError] = useState(false)
+
+	useEffect(() => {
+		getCompany({
+			company,
+			onSuccess: response => setCompany(response.data),
+			onFail: error => setError(true),
+		})
+	}, [])
 
 	const onSuccess = (response) => {
 		setResult(response.data)
@@ -25,11 +36,6 @@ const CaptureComponent = ({ match }) => {
 		setResult(response.data)
 		next()
 	}
-
-	useEffect(() => {
-		console.log('setting result')
-		console.log(result)
-	}, [result])
 
 	return (
 		<Container className="d-flex justify-content-center">
@@ -44,6 +50,25 @@ const CaptureComponent = ({ match }) => {
 						className="d-flex justify-content-start flex-nowrap"
 						style={{ overflow: 'hidden' }}
 					>
+						{err && (
+							<Column>
+								<Row>
+									<Column className="mt-3">
+										<h2>Desculpe :(</h2>
+									</Column>
+									<Column className="mt-5">
+										<p>
+											O parametro da url informada não corresponde com a
+											empresa que você deseja se cadastrar.
+										</p>
+										<p>Verifique o link ou entre em contato com o suporte</p>
+									</Column>
+									<Column className="mt-3">
+										A equipe controlead agradece :)
+									</Column>
+								</Row>
+							</Column>
+						)}
 						<Column id="step1" className="step">
 							<Row>
 								<Column>
@@ -52,14 +77,14 @@ const CaptureComponent = ({ match }) => {
 								<Column>
 									<Formik
 										initialValues={{
-											name: 'guilherme',
-											whatsapp: '12991936633',
-											system_id: '1234',
-											email: 'gui.rosa.soares@',
+											name: '',
+											whatsapp: '',
+											system_id: '',
+											email: '',
 										}}
 										onSubmit={async (values) => {
 											insertUser({
-												values: { ...values, company },
+												values: { ...values, company: comp._id },
 												onSuccess,
 												onFail,
 											})

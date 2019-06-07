@@ -19,7 +19,7 @@ api.interceptors.response.use(
 		if (error.response.status === 401) {
 			redirect('/login')
 		}
-		return error.response
+		return Promise.reject(error.response)
 	},
 )
 
