@@ -23,11 +23,6 @@ export const columns = [
 		sort: true,
 	},
 	{
-		text: 'Id do sistema',
-		dataField: 'system_id',
-		sort: true,
-	},
-	{
 		text: 'Automáticos',
 		dataField: 'subordinates',
 		sort: true,
@@ -40,7 +35,7 @@ export const columns = [
 	{
 		dataField: 'active',
 		text: 'Ativar',
-		formatter: row => (
+		formatter: () => (
 			<div>
 				<Button onClick={() => alert('test')}>Ativar</Button>
 			</div>
