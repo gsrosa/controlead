@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../../components/button/button'
 
-export const columns = [
+export const columns = setOpen => [
 	{
 		text: 'Nome',
 		dataField: 'name',
@@ -37,7 +37,7 @@ export const columns = [
 		text: 'Ativar',
 		formatter: () => (
 			<div>
-				<Button onClick={() => alert('test')}>Ativar</Button>
+				<Button onClick={() => setOpen(true)}>Ativar</Button>
 			</div>
 		),
 	},
