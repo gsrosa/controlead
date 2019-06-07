@@ -1,5 +1,5 @@
 import React from 'react'
-import DataTable from 'react-data-table-component'
+import DataTable from 'react-bootstrap-table-next'
 import { Row } from '../../components/layout/row'
 import { Column } from '../../components/layout/column'
 import { columns } from './columns'
@@ -20,7 +20,7 @@ const data = [
 const Home = () => (
 	<Row>
 		<Column>
-			<DataTable title="Arnold Movies" columns={columns} data={data} />
+			<DataTable keyField="id" columns={columns} data={data} />
 		</Column>
 	</Row>
 )

@@ -3,42 +3,47 @@ import { Button } from '../../components/button/button'
 
 export const columns = [
 	{
-		name: 'Nome',
-		selector: 'name',
-		sortable: true,
+		text: 'Nome',
+		dataField: 'name',
+		sort: true,
 	},
 	{
-		name: 'Email',
-		selector: 'email',
-		sortable: true,
+		text: 'Email',
+		dataField: 'email',
+		sort: true,
 	},
 	{
-		name: 'Whatsapp',
-		selector: 'whatsapp',
-		sortable: true,
+		text: 'Whatsapp',
+		dataField: 'whatsapp',
+		sort: true,
 	},
 	{
-		name: 'Patrocinador',
-		selector: 'sponsor',
-		sortable: true,
+		text: 'Patrocinador',
+		dataField: 'sponsor',
+		sort: true,
 	},
 	{
-		name: 'Id do sistema',
-		selector: 'system_id',
-		sortable: true,
+		text: 'Id do sistema',
+		dataField: 'system_id',
+		sort: true,
 	},
 	{
-		name: 'Automáticos',
-		selector: 'subordinates',
-		sortable: true,
+		text: 'Automáticos',
+		dataField: 'subordinates',
+		sort: true,
 	},
 	{
-		name: 'Manuais',
-		selector: 'subordinates_manual',
-		sortable: true,
+		text: 'Manuais',
+		dataField: 'subordinates_manual',
+		sort: true,
 	},
 	{
-		name: 'Ativar',
-		cell: () => <Button onClick={() => alert('test')}>Ativar</Button>,
+		dataField: 'active',
+		text: 'Ativar',
+		formatter: row => (
+			<div>
+				<Button onClick={() => alert('test')}>Ativar</Button>
+			</div>
+		),
 	},
 ]
