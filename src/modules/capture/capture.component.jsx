@@ -23,7 +23,7 @@ const CaptureComponent = ({ match }) => {
 		getCompany({
 			company,
 			onSuccess: response => setCompany(response.data),
-			onFail: error => setError(true),
+			onFail: () => setError(true),
 		})
 	}, [])
 
@@ -96,13 +96,6 @@ const CaptureComponent = ({ match }) => {
 													<Field
 														name="name"
 														label="*Nome"
-														component={RenderInput}
-													/>
-												</Column>
-												<Column>
-													<Field
-														name="system_id"
-														label="*Id do sistema"
 														component={RenderInput}
 													/>
 												</Column>
