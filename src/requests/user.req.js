@@ -20,3 +20,13 @@ export const login = async ({ values, onSuccess, onFail }) => {
 		onSuccess,
 	})
 }
+
+export const getInative = async ({ onSuccess }) => {
+	const onFail = response => console.log(response)
+
+	createApiRequest({
+		url: '/user/inative',
+		onFail,
+		onSuccess,
+	})
+}

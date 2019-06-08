@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
 	const [logged, setLogged] = useState(loggedContext)
 	const [user, setUser] = useState(userContext)
 	const [company, set] = useState(undefined)
-	const [token, setToken] = useState(tokenContext)
+	const [token, st] = useState(tokenContext)
 
 	const clear = () => {
 		localStorage.clear()
@@ -31,6 +31,11 @@ export const UserProvider = ({ children }) => {
 	const setCompany = (value) => {
 		set(value)
 		localStorage.setItem('company', value)
+	}
+
+	const setToken = (value) => {
+		st(value)
+		localStorage.setItem('token', value)
 	}
 
 	return (

@@ -5,22 +5,32 @@ import { redirect } from '../index'
 const calculatePercentage = (loaded, total) => Math.floor(loaded * 1.0) / total
 
 const api = axios.create({
-	baseURL: 'http://localhost:3000',
+	baseURL: 'http://localhost:3000/',
 })
 
 api.interceptors.request.use(async (config) => {
+	NProgress.start()
 	const token = localStorage.getItem('token')
 	const company = localStorage.getItem('company')
-	return !token ? config : { ...config, headers: { ...config.headers, token, company } }
+	return !token
+		? config
+		: {
+			...config,
+			headers: { ...config.headers, token, company },
+		  }
 })
 
 api.interceptors.response.use(
-	response => response,
+	(response) => {
+		NProgress.done(true)
+		return response
+	},
 	(error) => {
 		if (error.response.status === 401) {
 			redirect('/login')
+			localStorage.clear()
 		}
-		return Promise.reject(error.response)
+		return Promise.reject(error)
 	},
 )
 
@@ -28,11 +38,6 @@ api.defaults.onDownloadProgress = (e) => {
 	const percentage = calculatePercentage(e.loaded, e.total)
 	NProgress.set(percentage)
 }
-
-axios.interceptors.response.use((response) => {
-	NProgress.done(true)
-	return response
-})
 
 const getMethod = ({
 	method, url, data, headers,
@@ -69,12 +74,8 @@ export const createApiRequest = async ({
 
 	try {
 		const response = await req
-		console.log(req)
-		if (onSuccess) {
-			onSuccess(response)
-		}
+		if (onSuccess) onSuccess(response)
 	} catch (err) {
-		console.log(err)
 		if (onFail) onFail(err)
 	}
 }

@@ -28,6 +28,7 @@ const LoginComponent = () => {
 						initialValues={{ rmail: '', password: '' }}
 						onSubmit={(values) => {
 							const onSuccess = (response) => {
+                console.log(response)
 								setLogged(true)
 								setCompany(response.data.company)
 								setUser(response.data)
