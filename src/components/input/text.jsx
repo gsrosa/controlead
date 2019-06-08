@@ -54,10 +54,10 @@ const Form = styled.div`
 			color: red;
 		}
 		&:valid + ${Label} {
-			color: #ccc;
+			color: #666666;
 		}
 		&:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
-			color: #ccc;
+			color: #666666;
 			margin-top: -20px;
 			font-size: 9pt;
 		}

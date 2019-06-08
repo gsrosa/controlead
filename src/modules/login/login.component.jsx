@@ -7,9 +7,11 @@ import { Button } from '../../components/button/button'
 import { UserContext } from '../../store/context/user.context'
 import { redirect } from '../../store'
 import { RenderInput } from '../../components/forms/input-render'
+import { login } from '../../requests/user.req'
+import { notify } from '../../components/toast'
 
 const LoginComponent = () => {
-	const { setLogged } = useContext(UserContext)
+	const { setLogged, setUser, setCompany,setToken } = useContext(UserContext)
 
 	return (
 		<Container>
@@ -23,15 +25,27 @@ const LoginComponent = () => {
 						<h4>Acessar capture lead</h4>
 					</Column>
 					<Formik
-						initialValues={{ login: '', password: '' }}
-						onSubmit={() => {}}
+						initialValues={{ rmail: '', password: '' }}
+						onSubmit={(values) => {
+							const onSuccess = (response) => {
+								setLogged(true)
+								setCompany(response.data.company)
+								setUser(response.data)
+								setToken(response.data.token)
+								redirect('/')
+							}
+							const onFail = (response) => {
+								notify({ text: 'Email ou senha incorretos' }).error()
+							}
+							login({ values, onFail, onSuccess })
+						}}
 						render={() => (
 							<Form>
 								<Row align="center" justify="center">
 									<Column className="mt-5">
 										<Field
-											label="Login"
-											name="login"
+											label="E-mail"
+											name="email"
 											type="text"
 											component={RenderInput}
 										/>
@@ -45,13 +59,7 @@ const LoginComponent = () => {
 										/>
 									</Column>
 									<Column className="mt-4" flex justify="end">
-										<Button
-											theme="success"
-											onClick={() => {
-												setLogged(true)
-												redirect('/home')
-											}}
-										>
+										<Button theme="success" type="submit">
 											Entrar
 										</Button>
 									</Column>
