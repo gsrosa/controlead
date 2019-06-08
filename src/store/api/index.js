@@ -10,7 +10,8 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
 	const token = localStorage.getItem('token')
-	return !token ? config : { ...config, headers: { ...config.headers, token } }
+	const company = localStorage.getItem('company')
+	return !token ? config : { ...config, headers: { ...config.headers, token, company } }
 })
 
 api.interceptors.response.use(
