@@ -10,3 +10,17 @@ body{
 .step-move{
   margin-left: -100%;
 }
+
+.table{
+  border: 0px solid #fff;
+}
+
+.table thead {
+  font-size: 9pt;
+  border: 0px solid #fff;
+}
+
+.table-bordered td, .table-bordered th {
+  border: 0px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  }

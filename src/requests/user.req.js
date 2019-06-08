@@ -30,3 +30,26 @@ export const getInative = async ({ onSuccess }) => {
 		onSuccess,
 	})
 }
+
+export const activeUser = async ({ value, onSuccess }) => {
+	const onFail = response => console.log(response)
+
+	createApiRequest({
+		url: '/user',
+		data: { ...value },
+		method: 'PUT',
+		onFail,
+		onSuccess,
+	})
+}
+
+export const deleteUser = async ({ _id, onSuccess }) => {
+	const onFail = response => console.log(response)
+
+	createApiRequest({
+		url: `/leads/${_id}`,
+		method: 'DELETE',
+		onFail,
+		onSuccess,
+	})
+}

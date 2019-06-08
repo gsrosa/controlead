@@ -4,16 +4,27 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ButtonStyled = styled.button`
+	${(props) => {
+		switch (props.theme) {
+		case 'danger':
+			props.primary = 'red'
+			props.secondary = 'red'
+			break
+		default:
+			props.primary = '#3d52bf'
+			props.secondary = '#304199'
+		}
+	}}
 	transition: all 0.7s;
 	border: 1px solid transparent;
 	padding: 7px 20px;
-	background: #3d52bf;
+	background: ${props => props.primary};
 	color: #fff;
 	border-radius: 5px;
 	font-size: 11pt;
 	font-family: Nunito;
 	&:hover {
-		background: #304199;
+		background: ${props => props.secondary};
 	}
 	&:focus {
 		outline: none;
@@ -23,7 +34,7 @@ const ButtonStyled = styled.button`
 export const Button = ({
 	className, theme, large, small, block, children, ...props
 }) => (
-	<ButtonStyled className={`${className}`} {...props}>
+	<ButtonStyled className={`${className}`} {...props} theme={theme}>
 		{children}
 	</ButtonStyled>
 )

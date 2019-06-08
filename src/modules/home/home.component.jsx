@@ -1,28 +1,66 @@
 import React, { useState, useEffect } from 'react'
 import DataTable from 'react-bootstrap-table-next'
+import { Form, Formik, Field } from 'formik'
 import { Row } from '../../components/layout/row'
 import { Column } from '../../components/layout/column'
-import { columns } from './columns'
 import Modal from '../../components/modal'
-import { getInative } from '../../requests/user.req'
+import { getInative, activeUser } from '../../requests/user.req'
+import { RenderInput } from '../../components/forms/input-render'
+import { Button } from '../../components/button/button'
+import { notify } from '../../components/toast'
+import { columns } from './columns'
 
 const Home = () => {
 	const [isOpen, setOpen] = useState(false)
 	const [data, setData] = useState([])
+	const [_id, setId] = useState('')
+
+	const req = () => getInative({ onSuccess: response => setData(response.data) })
 
 	useEffect(() => {
-		getInative({ onSuccess: response => setData(response.data) })
-		console.log('data', data)
+		req()
 	}, [])
 
 	return (
 		<Row>
 			<Column>
-				<DataTable keyField="id" columns={columns(setOpen)} data={data} />
+				<DataTable keyField="id" columns={columns(setOpen, setId, req)} data={data} />
 				<Modal isOpen={isOpen} requestClose={() => setOpen(false)}>
 					<Row>
 						<Column>
-							<h2>test</h2>
+							<Formik
+								initialValues={{ system_id: '', _id }}
+								onSubmit={(value) => {
+									activeUser({
+										value,
+										onSuccess: () => {
+											notify({
+												text: 'Usuário ativado com sucesso',
+											}).success()
+											req()
+											setOpen(false)
+										},
+									})
+								}}
+								render={() => (
+									<Form className="row">
+										<Field name="_id" type="hidden" />
+										<Column flex justify="center">
+											<h3>Ativar usuário</h3>
+										</Column>
+										<Column>
+											<Field
+												name="system_id"
+												label="Id do sistema"
+												component={RenderInput}
+											/>
+										</Column>
+										<Column flex justify="end">
+											<Button type="submit">Ativar usuário</Button>
+										</Column>
+									</Form>
+								)}
+							/>
 						</Column>
 					</Row>
 				</Modal>

@@ -1,7 +1,17 @@
 import React from 'react'
 import { Button } from '../../components/button/button'
+import { deleteUser } from '../../requests/user.req'
+import { notify } from '../../components/toast'
 
-export const columns = setOpen => [
+const del = (row, req) => () => deleteUser({
+	_id: row._id,
+	onSuccess: () => {
+		notify({ text: 'Usuário removido com sucesso' }).success()
+		req()
+	},
+})
+
+export const columns = (setOpen, setId, req) => [
 	{
 		text: 'Nome',
 		dataField: 'name',
@@ -19,25 +29,33 @@ export const columns = setOpen => [
 	},
 	{
 		text: 'Patrocinador',
-		dataField: 'sponsor',
-		sort: true,
-	},
-	{
-		text: 'Automáticos',
-		dataField: 'subordinates',
-		sort: true,
-	},
-	{
-		text: 'Manuais',
-		dataField: 'subordinates_manual',
+		dataField: 'sponsor_id',
 		sort: true,
 	},
 	{
 		dataField: 'active',
 		text: 'Ativar',
-		formatter: () => (
+		formatter: (cell, row) => (
 			<div>
-				<Button onClick={() => setOpen(true)}>Ativar</Button>
+				<Button
+					onClick={() => {
+						setOpen(true)
+						setId(row._id)
+					}}
+				>
+					Ativar
+				</Button>
+			</div>
+		),
+	},
+	{
+		dataField: 'delete',
+		text: 'Excluir',
+		formatter: (i, row) => (
+			<div>
+				<Button theme="danger" onClick={del(row, req)}>
+					Apagar
+				</Button>
 			</div>
 		),
 	},

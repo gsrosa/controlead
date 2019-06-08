@@ -35,9 +35,9 @@ export default ({ ...props }) => {
 			<Nav>
 				<h3>Controlead</h3>
 				<div className="d-flex flew-wrap justify-content-between">
-					<NavItem>Fila de espera</NavItem>
-					<NavItem>Usuários ativos</NavItem>
-					<NavItem>Inserir manualmente</NavItem>
+					<NavItem onClick={() => redirect('/')}>Fila de espera</NavItem>
+					<NavItem onClick={() => redirect('/users/active')}>Usuários ativos</NavItem>
+					<NavItem onClick={() => redirect('/manual')}>Inserir manualmente</NavItem>
 					<NavItem
 						last
 						onClick={() => {
