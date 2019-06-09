@@ -11,8 +11,18 @@ const Home = (props) => {
 	)
 }
 
+const ActiveUsers = (props) => {
+	const ActiveUsersComponent = lazy(() => import('../../modules/user/active-user.component'))
+	return (
+		<Suspense fallback="loading">
+			<ActiveUsersComponent {...props} />
+		</Suspense>
+	)
+}
+
 const routes = () => (
 	<Switch>
+		<PrivateRoute path="/users/active" component={ActiveUsers} />
 		<PrivateRoute path="/" component={Home} />
 	</Switch>
 )
