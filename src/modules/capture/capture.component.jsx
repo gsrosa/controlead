@@ -125,15 +125,19 @@ const CaptureComponent = ({ match }) => {
 							</Row>
 						</Column>
 						<Column>
-							<h3>{result.name}</h3>
+							<h3>{result ? result.name : ''}</h3>
 							<h4 className="text-center">
 								Seu pré-cadastro foi efetuado com sucesso!
 							</h4>
 							Agora você deve efetuar o cadastro na Vencervip utilizando o link abaixo
 							<br />
-							<a href={`https://vencervip.com.br/afiliado/${result.system_id}`}>
+							<a
+								href={`https://vencervip.com.br/afiliado/${
+									result ? result.system_id : ''
+								}`}
+							>
 								https://vencervip.com.br/afiliado/
-								{result.sponsor_id}
+								{result ? result.sponsor_id : ''}
 							</a>
 							<br />
 							<br />

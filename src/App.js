@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Router } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { history } from './store'
 
@@ -11,10 +11,10 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => (
 	<BrowserRouter>
-		<Router history={history}>
+		<HashRouter history={history}>
 			<Main />
 			<ToastContainer />
-		</Router>
+		</HashRouter>
 	</BrowserRouter>
 )
 
