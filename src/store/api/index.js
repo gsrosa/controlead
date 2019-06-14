@@ -7,7 +7,7 @@ const calculatePercentage = (loaded, total) => Math.floor(loaded * 1.0) / total
 const api = axios.create({
 	baseURL:
 		process.env.NODE_ENV === 'development'
-			? 'http://localhost:3000/'
+			? 'https://controlteam.app/api/'
 			: 'https://controlteam.app/api/',
 })
 
@@ -30,10 +30,10 @@ api.interceptors.response.use(
 	},
 	(error) => {
 		if (error.response.status === 401) {
-			redirect('/login')
 			localStorage.clear()
+			redirect('/login')
 		}
-		return Promise.reject(error)
+		return Promise.reject(error.response)
 	},
 )
 
