@@ -38,13 +38,16 @@ const CaptureComponent = ({ match }) => {
 	}
 
 	return (
-		<Container className="d-flex justify-content-center">
-			<Row className="align-self-center" justify="center" align="center">
+		<Container>
+			<Row justify="center">
 				<Column
+					xs="8"
+					sm="8"
+					md="5"
 					lg="4"
-					xl="4"
+					xl="3"
 					style={{ border: '1px solid #ccc', borderRadius: '10px', width: '80em' }}
-					className="p-3 text-center"
+					className="p-3 text-center mt-5"
 				>
 					<Row
 						className="d-flex justify-content-start flex-nowrap"
@@ -72,7 +75,7 @@ const CaptureComponent = ({ match }) => {
 						<Column id="step1" className="step">
 							<Row>
 								<Column>
-									<h2>Lead capture</h2>
+									<h2>{comp.name}</h2>
 								</Column>
 								<Column>
 									<Formik
@@ -103,6 +106,7 @@ const CaptureComponent = ({ match }) => {
 													<Field
 														name="whatsapp"
 														label="*Whatsapp"
+														mask="+55 99 99999-9999"
 														component={RenderInput}
 													/>
 												</Column>
