@@ -31,7 +31,7 @@ const NavTitle = styled(NavItem)`
 `
 
 export default ({ ...props }) => {
-	const { clear } = useContext(UserContext)
+	const { clear, user } = useContext(UserContext)
 
 	return (
 		<>
@@ -40,7 +40,9 @@ export default ({ ...props }) => {
 				<div className="d-flex flew-wrap justify-content-between">
 					<NavItem onClick={() => redirect('/')}>Fila de espera</NavItem>
 					<NavItem onClick={() => redirect('/users/active')}>Usuários ativos</NavItem>
-					<NavItem onClick={() => redirect('/manual')}>Inserir manualmente</NavItem>
+					{user.admin && (
+						<NavItem onClick={() => redirect('/manual')}>Inserir manualmente</NavItem>
+					)}
 					<NavItem
 						last
 						onClick={() => {
