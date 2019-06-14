@@ -6,13 +6,25 @@ import { statusLead } from '../../requests/leads.req'
 const onClick = (row, req) => () => {
 	const { user, active } = row
 	const success = () => {
-		notify({ text: `Usuário ${active ? 'Ativado' : 'Desativado'} com sucesso` }).success()
-		req()
+		notify({ text: `Usuário ${active ? 'desativado' : 'ativado'} com sucesso` }).success()
+		setTimeout(req, 200)
 	}
 	statusLead({ _id: user, status: active, onSuccess: success })
 }
 
-export const columns = req => [
+const justAdm = req => ({
+	dataField: 'delete',
+	text: 'Estado',
+	formatter: (i, row) => (
+		<div>
+			<Button theme={row.active ? 'danger' : 'success'} onClick={onClick(row, req)}>
+				{row.active ? 'Desativar' : 'Ativar'}
+			</Button>
+		</div>
+	),
+})
+
+const cols = [
 	{ text: 'Usuário', dataField: 'name', sort: true },
 	{
 		text: 'Email',
@@ -32,15 +44,6 @@ export const columns = req => [
 		text: 'Subordinados manuais',
 		dataField: 'subordinate_manual_count',
 	},
-	{
-		dataField: 'delete',
-		text: 'Estado',
-		formatter: (i, row) => (
-			<div>
-				<Button theme={row.active ? 'danger' : 'success'} onClick={onClick(row, req)}>
-					{row.active ? 'Desativar' : 'Ativar'}
-				</Button>
-			</div>
-		),
-	},
 ]
+
+export const columns = (req, user) => (user.admin ? [...cols, justAdm(req)] : cols)

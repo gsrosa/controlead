@@ -26,6 +26,9 @@ const NavItem = styled.span`
 		color: #ccc;
 	}
 `
+const NavTitle = styled(NavItem)`
+	font-size: 1.5em;
+`
 
 export default ({ ...props }) => {
 	const { clear } = useContext(UserContext)
@@ -33,7 +36,7 @@ export default ({ ...props }) => {
 	return (
 		<>
 			<Nav>
-				<h3>Controlead</h3>
+				<NavTitle onClick={() => redirect('/')}>Control Lead</NavTitle>
 				<div className="d-flex flew-wrap justify-content-between">
 					<NavItem onClick={() => redirect('/')}>Fila de espera</NavItem>
 					<NavItem onClick={() => redirect('/users/active')}>Usuários ativos</NavItem>

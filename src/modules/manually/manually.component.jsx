@@ -8,11 +8,13 @@ import { RenderSelect } from '../../components/forms/select-render'
 import { getUserWithFilter } from '../../requests/user.req'
 import { leadManual } from '../../requests/leads.req'
 import { notify } from '../../components/toast'
+import { validation } from './validate'
 
 const ManuallyComponent = () => {
-	const submit = (values) => {
+	const submit = (values, { resetForm }) => {
 		const onSuccess = () => {
 			notify({ text: 'Inserido com sucesso' }).success()
+			resetForm()
 		}
 		leadManual({ values: { ...values, sponsor_id: values.sponsor_id.value }, onSuccess })
 	}
@@ -40,8 +42,10 @@ const ManuallyComponent = () => {
 						name: '',
 						whatsapp: '',
 						email: '',
+						system_id: '',
 						sponsor_id: '',
 					}}
+					validationSchema={validation}
 					onSubmit={submit}
 					render={() => (
 						<Form className="row">

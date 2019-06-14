@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import DataTable from 'react-bootstrap-table-next'
 import { Form, Formik, Field } from 'formik'
 import { Row } from '../../components/layout/row'
@@ -9,11 +9,13 @@ import { RenderInput } from '../../components/forms/input-render'
 import { Button } from '../../components/button/button'
 import { notify } from '../../components/toast'
 import { columns } from './columns'
+import { UserContext } from '../../store/context/user.context'
 
 const Home = () => {
 	const [isOpen, setOpen] = useState(false)
 	const [data, setData] = useState([])
 	const [_id, setId] = useState('')
+	const { user } = useContext(UserContext)
 
 	const req = () => getInative({ onSuccess: response => setData(response.data) })
 
@@ -24,7 +26,7 @@ const Home = () => {
 	return (
 		<Row>
 			<Column>
-				<DataTable keyField="id" columns={columns(setOpen, setId, req)} data={data} />
+				<DataTable keyField="id" columns={columns(setOpen, setId, req, user)} data={data} />
 				<Modal isOpen={isOpen} requestClose={() => setOpen(false)}>
 					<Row>
 						<Column>

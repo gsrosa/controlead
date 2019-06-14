@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 
 const loggedContext = localStorage.getItem('logged') !== null
 const userContext = localStorage.getItem('user')
@@ -18,14 +18,14 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
 	const [logged, setLogged] = useState(loggedContext)
-	const [user, setUser] = useState(userContext)
+	const [user, stU] = useState(userContext ? JSON.parse(userContext) : null)
 	const [company, set] = useState(undefined)
 	const [token, st] = useState(tokenContext)
 
 	const clear = () => {
 		localStorage.clear()
 		setLogged(false)
-		setUser({})
+		stU({})
 	}
 
 	const setCompany = (value) => {
@@ -36,6 +36,11 @@ export const UserProvider = ({ children }) => {
 	const setToken = (value) => {
 		st(value)
 		localStorage.setItem('token', value)
+	}
+
+	const setUser = (value) => {
+		stU(value)
+		localStorage.setItem('user', JSON.stringify(value))
 	}
 
 	return (

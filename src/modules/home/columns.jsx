@@ -11,7 +11,41 @@ const del = (row, req) => () => deleteUser({
 	},
 })
 
-export const columns = (setOpen, setId, req) => [
+const justAdm = ({
+	setOpen, setId, req, user,
+}) => (user.admin
+	? [
+		{
+			dataField: 'active',
+			text: 'Ativar',
+			formatter: (cell, row) => (
+				<div>
+					<Button
+						onClick={() => {
+							setOpen(true)
+							setId(row._id)
+						}}
+					>
+								Ativar
+					</Button>
+				</div>
+			),
+		},
+		{
+			dataField: 'delete',
+			text: 'Excluir',
+			formatter: (i, row) => (
+				<div>
+					<Button theme="danger" onClick={del(row, req)}>
+								Apagar
+					</Button>
+				</div>
+			),
+		},
+		  ]
+	: [])
+
+export const columns = (setOpen, setId, req, user) => [
 	{
 		text: 'Nome',
 		dataField: 'name',
@@ -32,31 +66,7 @@ export const columns = (setOpen, setId, req) => [
 		dataField: 'sponsor_id',
 		sort: true,
 	},
-	{
-		dataField: 'active',
-		text: 'Ativar',
-		formatter: (cell, row) => (
-			<div>
-				<Button
-					onClick={() => {
-						setOpen(true)
-						setId(row._id)
-					}}
-				>
-					Ativar
-				</Button>
-			</div>
-		),
-	},
-	{
-		dataField: 'delete',
-		text: 'Excluir',
-		formatter: (i, row) => (
-			<div>
-				<Button theme="danger" onClick={del(row, req)}>
-					Apagar
-				</Button>
-			</div>
-		),
-	},
+	...justAdm({
+		setOpen, setId, req, user,
+	}),
 ]
