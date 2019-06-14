@@ -20,9 +20,19 @@ const ActiveUsers = (props) => {
 	)
 }
 
+const Manually = (props) => {
+	const ManuallyComponent = lazy(() => import('../../modules/manually/manually.component'))
+	return (
+		<Suspense fallback="loading">
+			<ManuallyComponent {...props} />
+		</Suspense>
+	)
+}
+
 const routes = () => (
 	<Switch>
 		<PrivateRoute path="/users/active" component={ActiveUsers} />
+		<PrivateRoute path="/manual" component={Manually} />
 		<PrivateRoute path="/" component={Home} />
 	</Switch>
 )

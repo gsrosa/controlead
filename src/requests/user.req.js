@@ -53,3 +53,13 @@ export const deleteUser = async ({ _id, onSuccess }) => {
 		onSuccess,
 	})
 }
+
+export const getUserWithFilter = ({ filter, onSuccess }) => {
+	const onFail = response => console.log(response)
+
+	createApiRequest({
+		url: `/user/filter/${filter}`,
+		onFail,
+		onSuccess,
+	})
+}

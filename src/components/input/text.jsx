@@ -7,7 +7,7 @@ const ErrorMessage = styled.span`
 	width: 100%;
 `
 
-const Label = styled.label`
+export const Label = styled.label`
 	font-size: 10pt;
 	color: #666666;
 	position: absolute;
