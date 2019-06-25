@@ -133,25 +133,17 @@ const CaptureComponent = ({ match }) => {
 							<h4 className="text-center">
 								Seu pré-cadastro foi efetuado com sucesso!
 							</h4>
-							Agora você deve efetuar o cadastro na Vencervip utilizando o link abaixo
-							<br />
-							<a
-								href={`https://vencervip.com.br/afiliado/${
-									result ? result.system_id : ''
-								}`}
-							>
-								https://vencervip.com.br/afiliado/
-								{result ? result.sponsor_id : ''}
-							</a>
+							Agora você deve efetuar o cadastro na
+							{' '}
+							{comp.name}
+							{' '}
+utilizando o link
+							abaixo
 							<br />
 							<br />
-							<p>
-								Após efetuar o cadastro e ativação na Vencervip, você deve entrar no
-								link abaixo e seguir os próximos passos
-							</p>
 							<br />
-							<a href="https://controlteam.com.br/pos-cadastro/">
-								https://controlteam.com.br/pos-cadastro/
+							<a href={`${comp ? comp.link : ''}${result ? result.sponsor_id : ''}`}>
+								{result ? comp.link + result.sponsor_id : ''}
 							</a>
 						</Column>
 					</Row>
