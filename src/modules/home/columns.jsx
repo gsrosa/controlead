@@ -2,6 +2,8 @@ import React from 'react'
 import { Button } from '../../components/button/button'
 import { deleteUser } from '../../requests/user.req'
 import { notify } from '../../components/toast'
+import { ConfirmIcon } from '../../components/icons/confirm.icon'
+import { DeleteIcon } from '../../components/icons/delete.icon'
 
 const del = (row, req) => () => deleteUser({
 	_id: row._id,
@@ -21,12 +23,13 @@ const justAdm = ({
 			formatter: (cell, row) => (
 				<div>
 					<Button
+						sm
 						onClick={() => {
 							setOpen(true)
 							setId(row._id)
 						}}
 					>
-								Ativar
+						<ConfirmIcon />
 					</Button>
 				</div>
 			),
@@ -36,8 +39,8 @@ const justAdm = ({
 			text: 'Excluir',
 			formatter: (i, row) => (
 				<div>
-					<Button theme="danger" onClick={del(row, req)}>
-								Apagar
+					<Button sm theme="danger" onClick={del(row, req)}>
+						<DeleteIcon />
 					</Button>
 				</div>
 			),
@@ -52,14 +55,25 @@ export const columns = (setOpen, setId, req, user) => [
 		sort: true,
 	},
 	{
-		text: 'Email',
-		dataField: 'email',
-		sort: true,
-	},
-	{
 		text: 'Whatsapp',
 		dataField: 'whatsapp',
 		sort: true,
+		formatter: (cell, row) => (
+			<span
+				style={{ cursor: 'pointer' }}
+				onClick={() => {
+					window.open(
+						`https://api.whatsapp.com/send?phone=${row.whatsapp.replace(
+							/[+|-|\s|-]/g,
+							'',
+						)}`,
+						'_blank',
+					)
+				}}
+			>
+				{row.whatsapp}
+			</span>
+		),
 	},
 	{
 		text: 'Patrocinador',
@@ -67,6 +81,9 @@ export const columns = (setOpen, setId, req, user) => [
 		sort: true,
 	},
 	...justAdm({
-		setOpen, setId, req, user,
+		setOpen,
+		setId,
+		req,
+		user,
 	}),
 ]

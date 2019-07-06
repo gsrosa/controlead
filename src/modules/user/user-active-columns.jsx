@@ -2,6 +2,8 @@ import React from 'react'
 import { Button } from '../../components/button/button'
 import { notify } from '../../components/toast'
 import { statusLead } from '../../requests/leads.req'
+import { ConfirmIcon } from '../../components/icons/confirm.icon'
+import { DeleteIcon } from '../../components/icons/delete.icon'
 
 const onClick = (row, req) => () => {
 	const { user, active } = row
@@ -17,8 +19,8 @@ const justAdm = req => ({
 	text: 'Estado',
 	formatter: (i, row) => (
 		<div>
-			<Button theme={row.active ? 'danger' : 'success'} onClick={onClick(row, req)}>
-				{row.active ? 'Desativar' : 'Ativar'}
+			<Button sm theme={row.active ? 'danger' : 'success'} onClick={onClick(row, req)}>
+				{row.active ? <DeleteIcon /> : <ConfirmIcon />}
 			</Button>
 		</div>
 	),
@@ -27,21 +29,16 @@ const justAdm = req => ({
 const cols = [
 	{ text: 'Usuário', dataField: 'name', sort: true },
 	{
-		text: 'Email',
-		dataField: 'email',
-		sort: true,
-	},
-	{
 		text: 'Id do sistema',
 		dataField: 'system_id',
 		sort: true,
 	},
 	{
-		text: 'Subordinados automáticos',
+		text: 'Automáticos',
 		dataField: 'subordinate_count',
 	},
 	{
-		text: 'Subordinados manuais',
+		text: 'Manuais',
 		dataField: 'subordinate_manual_count',
 	},
 ]
