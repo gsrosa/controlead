@@ -4,17 +4,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 const ButtonStyled = styled.button`
-	${(props) => {
-		switch (props.theme) {
-		case 'danger':
-			props.primary = 'red'
-			props.secondary = 'red'
-			break
-		default:
-			props.primary = '#3d52bf'
-			props.secondary = '#304199'
-		}
-	}}
 	transition: all 0.7s;
 	border: 1px solid transparent;
 	padding: 7px 20px;
@@ -36,13 +25,26 @@ const ButtonStyled = styled.button`
 		`}
 `
 
+const switchColors = (theme) => {
+	switch (theme) {
+	case 'danger':
+		return { primary: 'red', secondary: 'red' }
+	default:
+		return { primary: '#3d52bf', secondary: '#304199' }
+	}
+}
+
 export const Button = ({
 	className, theme, large, small, block, children, ...props
-}) => (
-	<ButtonStyled className={`${className}`} {...props} theme={theme}>
-		{children}
-	</ButtonStyled>
-)
+}) => {
+	const colors = switchColors(theme)
+
+	return (
+		<ButtonStyled className={`${className}`} {...colors} {...props} theme={theme}>
+			{children}
+		</ButtonStyled>
+	)
+}
 
 Button.propTypes = {
 	className: PropTypes.string,
